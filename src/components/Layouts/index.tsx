@@ -2,10 +2,12 @@ import React from "react";
 import MainNavbar from "../MainNavbar";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
+import SubNavbar from "../SubNavbar";
 
 const Layout = (props: any) => {
   return (
     <>
+      <SubNavbar />
       <MainNavbar />
 
       <MainContent>{props.children}</MainContent>
@@ -15,6 +17,4 @@ const Layout = (props: any) => {
 
 export default Layout;
 
-const MainContent = styled(Container)`
-  margin-top: 20px;
-`;
+const MainContent = styled.div``;

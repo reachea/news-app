@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import HomeScreen from "../src/screens/HomeScreen/HomeScreen";
 
 const Home: NextPage = () => {
-  return <div>Hi There!</div>;
+  return <HomeScreen />;
 };
 
 export default Home;

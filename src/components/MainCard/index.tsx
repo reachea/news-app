@@ -60,14 +60,6 @@ const MainCardContainer = styled.div`
   &::before {
     position: absolute;
     content: "";
-    background: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        from(transparent),
-        to(#111)
-      ),
-      -webkit-gradient(linear, left top, left bottom, from(transparent), to(#111));
     background: linear-gradient(transparent, #111),
       linear-gradient(transparent, #111);
     height: 70%;
@@ -83,6 +75,17 @@ const MainCardContainer = styled.div`
     .content {
       h3 {
         font-size: 25px;
+
+        @media screen and (max-width: 767px) {
+          font-size: 20px;
+          margin-bottom: 12px;
+        }
+      }
+
+      span {
+        @media screen and (max-width: 767px) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -131,6 +134,11 @@ const MainCardContainer = styled.div`
           z-index: -1;
         }
       }
+
+      @media screen and (max-width: 767px) {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
     }
 
     span {
@@ -141,6 +149,10 @@ const MainCardContainer = styled.div`
         font-weight: 400;
         text-decoration: none;
         transition: 0.5s;
+      }
+
+      @media screen and (max-width: 767px) {
+        font-size: 14px;
       }
     }
   }
