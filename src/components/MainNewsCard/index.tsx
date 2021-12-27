@@ -1,25 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 
-const MainNewsCard = () => {
+interface MainNewsCardProps {
+  category?: string;
+  title?: string;
+  author?: string;
+  date?: string;
+  thumbnail?: string;
+}
+
+const MainNewsCard: React.FC<MainNewsCardProps> = ({
+  title,
+  author,
+  category,
+  date,
+  thumbnail,
+}) => {
   return (
     <MainNewsCardContainer>
-      <div className="politics-news-image">
-        <a href="#">
-          <img src="/main-news-1.jpg" alt="image" />
-        </a>
-      </div>
-      <div className="politics-news-content">
-        <span>Politics</span>
-        <h3>
+      {thumbnail ? (
+        <div className="politics-news-image">
           <a href="#">
-            Organizing conference among our selves to make it better financially
+            <img src="/main-news-1.jpg" alt="image" />
           </a>
-        </h3>
-        <p>
-          <a href="#">Jonson Steven</a> / 28 September, 2021
-        </p>
-      </div>
+        </div>
+      ) : (
+        <div className="placeholder"></div>
+      )}
+      {title ? (
+        <div className="politics-news-content">
+          <span>{category}</span>
+          <h3>
+            <a href="#">{title}</a>
+          </h3>
+          <p>
+            <a href="#">{author}</a> / {date}
+          </p>
+        </div>
+      ) : (
+        <div className="politics-news-content">
+          <div className="tag-placeholder" style={{ width: "100px" }}></div>
+          <h3>
+            <div className="tag-placeholder"></div>
+          </h3>
+          <p>
+            <div className="tag-placeholder"></div>
+          </p>
+        </div>
+      )}
     </MainNewsCardContainer>
   );
 };
@@ -27,6 +55,19 @@ const MainNewsCard = () => {
 export default MainNewsCard;
 
 const MainNewsCardContainer = styled.div`
+  .placeholder {
+    background-color: #bdc3c7;
+    width: 100%;
+    height: 230px;
+  }
+
+  .tag-placeholder {
+    background-color: #bdc3c7;
+    width: 300px;
+    height: 12px;
+    margin-bottom: 10px;
+  }
+
   .politics-news-image {
     overflow: hidden;
     position: relative;

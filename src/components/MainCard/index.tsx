@@ -24,27 +24,37 @@ const MainCard: React.FC<MainCardProps> = ({
 }) => {
   return (
     <MainCardContainer
-      className={`${variant === "secondary" ? "secondary" : "primary"}`}
+      className={`${variant === "secondary" ? "secondary" : "primary"} ${
+        image ? "" : "no-before"
+      }`}
       style={{
         maxHeight: height ? height + "px" : "auto",
         maxWidth: width ? width + "px" : "100%",
+        height: image ? "" : "280px",
       }}
     >
-      <img src={image} />
-      <div className="content">
-        <div className="tag">{tag}</div>
-        <h3>
-          <a href="#">{title}</a>
-        </h3>
+      {image ? (
+        <div className="d-flex flex-row justify-content-center bg-white">
+          <img src={image} />
+        </div>
+      ) : (
+        ""
+      )}
+      {title ? (
+        <div className={`content`}>
+          <div className="tag">{tag}</div>
+          <h3>
+            <a href="#">{title}</a>
+          </h3>
 
-        {author ? (
           <span>
             <a href="#">{author}</a> / {date}
           </span>
-        ) : (
           <span>{date}</span>
-        )}
-      </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </MainCardContainer>
   );
 };
@@ -56,6 +66,14 @@ const MainCardContainer = styled.div`
   background-size: cover;
   overflow: hidden;
   position: relative;
+  background-color: #bdc3c7;
+
+  &.no-before {
+    &::before {
+      background: unset !important;
+      width: 0px !important;
+    }
+  }
 
   &::before {
     position: absolute;
@@ -154,6 +172,13 @@ const MainCardContainer = styled.div`
       @media screen and (max-width: 767px) {
         font-size: 14px;
       }
+    }
+  }
+
+  &.primary {
+    img {
+      height: 543px !important;
+      width: auto;
     }
   }
 

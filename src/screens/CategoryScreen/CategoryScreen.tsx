@@ -2,26 +2,64 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import MainNewsCard from "../../components/MainNewsCard";
-import NewsCard from "../../components/NewsCard";
 import LatestNews from "./components/LatestNews";
-import SingleMainItem from "./components/SingleMainItem";
+import SingleMainItem from "../../components/SingleMainItem/SingleMainItem";
 import SocialMedia from "./components/SocialMedia";
 import Link from "next/link";
+import { gql, useQuery } from "@apollo/client";
 
-const PoliticScreen = () => {
+interface CategoryScreenProps {
+  id: string;
+}
+
+const QUERY = gql`
+  query publicNewsQuery {
+    publicNewsCategoryList {
+      id
+      name
+      news {
+        id
+        title
+        thumbnail
+        created_at
+        summary
+      }
+    }
+  }
+`;
+
+const CategoryScreen: React.FC<CategoryScreenProps> = ({ id }) => {
+  const { data, loading } = useQuery(QUERY);
+
+  if (!data || loading) return <></>;
+
+  console.log(data.publicNewsCategoryList);
+
   return (
     <NewsScreenContainer>
       <div className="page-title-area">
         <div className="container">
           <div className="page-title-content">
-            <h2>Politics</h2>
+            <h2>
+              {
+                data.publicNewsCategoryList.find(
+                  (x: any) => x.id === Number(id)
+                ).name
+              }
+            </h2>
             <ul>
               <li>
                 <Link href="/">
                   <a>Home</a>
                 </Link>
               </li>
-              <li>Politics</li>
+              <li>
+                {
+                  data.publicNewsCategoryList.find(
+                    (x: any) => x.id === Number(id)
+                  ).name
+                }
+              </li>
             </ul>
           </div>
         </div>
@@ -31,17 +69,38 @@ const PoliticScreen = () => {
         <Row>
           <Col lg={8}>
             <Row className="mb-5">
-              <Col lg={6}>
-                <MainNewsCard />
-              </Col>
-              <Col lg={6}>
-                <MainNewsCard />
-              </Col>
+              {data.publicNewsCategoryList
+                .filter((x: any) => x.id === Number(id))[0]
+                .news.map((y: any, idx: number) => {
+                  if (idx < 2) {
+                    console.log(y);
+                    return (
+                      <Col lg={6}>
+                        <MainNewsCard
+                          title={y.title}
+                          thumbnail={y.thumbnail}
+                          category={
+                            data.publicNewsCategoryList.find(
+                              (x: any) => x.id === Number(id)
+                            ).name
+                          }
+                          date={y.created_at}
+                          author={"None"}
+                        />
+                      </Col>
+                    );
+                  } else {
+                    return (
+                      <SingleMainItem
+                        title={y.title}
+                        thumbnail={y.thumbnail}
+                        category={y.name}
+                        date={y.created_at}
+                      />
+                    );
+                  }
+                })}
             </Row>
-            <SingleMainItem />
-            <SingleMainItem />
-            <SingleMainItem />
-            <SingleMainItem />
           </Col>
           <Col lg={4}>
             <LatestNews />
@@ -53,7 +112,7 @@ const PoliticScreen = () => {
   );
 };
 
-export default PoliticScreen;
+export default CategoryScreen;
 
 const NewsScreenContainer = styled.div`
   .container {

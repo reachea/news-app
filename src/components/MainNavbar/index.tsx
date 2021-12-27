@@ -3,8 +3,21 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { BiSearch } from "react-icons/bi";
 import styled from "styled-components";
 import Link from "next/link";
+import { gql, useQuery } from "@apollo/client";
 
+const QUERY = gql`
+  query publicNewsCategoryList {
+    publicNewsCategoryList {
+      id
+      name
+    }
+  }
+`;
 const MainNavbar = () => {
+  const { data, loading } = useQuery(QUERY);
+
+  if (!data || loading) return <></>;
+
   return (
     <>
       <MainNavbarContainer bg="light" expand="lg">
@@ -16,21 +29,17 @@ const MainNavbar = () => {
           <div className="container menu-container">
             <Navbar.Collapse id="navbar-menu" className="menu">
               <Nav className="mr-auto computer">
-                <Link href="/">
-                  <a className="nav-link">News</a>
-                </Link>
-                <Link href="/politics">
-                  <a className="nav-link">Politics</a>
-                </Link>
-                <Link href="/terms">
-                  <a className="nav-link">Terms and Conditions</a>
-                </Link>
-                <Link href="/about-us">
-                  <a className="nav-link">About Us</a>
-                </Link>
-                <Link href="/contact">
-                  <a className="nav-link">Contact</a>
-                </Link>
+                {data.publicNewsCategoryList.map((x: any) => {
+                  return (
+                    <Link
+                      href={`/${x.name.split(" ").join("-").toLowerCase()}?id=${
+                        x.id
+                      }`}
+                    >
+                      <a className="nav-link">{x.name}</a>
+                    </Link>
+                  );
+                })}
               </Nav>
             </Navbar.Collapse>
           </div>

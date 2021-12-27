@@ -15,17 +15,39 @@ const NewsCardBox: React.FC<NewsCardBoxProps> = ({
   title,
 }) => {
   return (
-    <NewsCardBoxContiner>
+    <NewsCardBoxContiner style={{ height: image ? "" : "130px" }}>
       <a href="#">
-        <img src={image} />
+        {image ? <img src={image} /> : <img className="placeholder" />}
       </a>
-      <div className="news-content">
-        <div className="tag">{tag}</div>
-        <h3>
-          <a href="#">{title}</a>
-        </h3>
-        <span>{date}</span>
-      </div>
+
+      {title ? (
+        <div className="news-content">
+          <div className={`tag ${tag ? "" : "tag-placeholder"}`}>{tag}</div>
+          <h3>
+            <a href="#">{title}</a>
+          </h3>
+          <span>{date}</span>
+        </div>
+      ) : (
+        <div className="news-content">
+          <div
+            className={`tag-placeholder`}
+            style={{ marginBottom: "20px", marginTop: "17px" }}
+          ></div>
+          <div
+            className={`${title ? "" : "tag-placeholder"}`}
+            style={{ width: "200px", height: "10px" }}
+          ></div>
+          <div
+            className={`${title ? "" : "tag-placeholder"}`}
+            style={{ width: "200px", height: "10px" }}
+          ></div>
+          <div
+            className={`${title ? "" : "tag-placeholder"}`}
+            style={{ width: "200px", height: "10px" }}
+          ></div>
+        </div>
+      )}
     </NewsCardBoxContiner>
   );
 };
@@ -37,6 +59,19 @@ const NewsCardBoxContiner = styled.div`
   border: 1px solid #eeeeee;
   position: relative;
   overflow: hidden;
+
+  .placeholder {
+    background-color: #bdc3c7;
+    width: 150px;
+    height: 100%;
+  }
+
+  .tag-placeholder {
+    background-color: #bdc3c7;
+    width: 100px;
+    height: 12px;
+    margin-bottom: 10px;
+  }
 
   a {
     img {
