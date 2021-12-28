@@ -1,48 +1,52 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 interface NewsCardProps {
+  id?: number;
   thumbnail?: string;
   title?: string;
   date?: string;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ thumbnail, title, date }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ thumbnail, title, date, id }) => {
   return (
-    <NewsCardContainer>
-      <div className="row align-items-center">
-        <div className="col-lg-4 col-sm-4">
-          {thumbnail ? (
-            <div className="politics-news-image">
-              <a href="#">
-                <img src={thumbnail} alt="image" />
-              </a>
-            </div>
-          ) : (
-            <div className="politics-news-image">
-              <a href="#">
-                <div className="placeholder"></div>
-              </a>
-            </div>
-          )}
+    <Link href={id ? `/news/${id}` : ""}>
+      <NewsCardContainer>
+        <div className="row align-items-center">
+          <div className="col-lg-4 col-sm-4">
+            {thumbnail ? (
+              <div className="politics-news-image">
+                <a>
+                  <img src={thumbnail} alt="image" />
+                </a>
+              </div>
+            ) : (
+              <div className="politics-news-image">
+                <a>
+                  <div className="placeholder"></div>
+                </a>
+              </div>
+            )}
+          </div>
+          <div className="col-lg-8 col-sm-8">
+            {title ? (
+              <div className="politics-news-content">
+                <h3>
+                  <a>{title}</a>
+                </h3>
+                <p>{date}</p>
+              </div>
+            ) : (
+              <div className="politics-news-content">
+                <h3 className="tag-placeholder"></h3>
+                <div className="tag-placeholder"></div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="col-lg-8 col-sm-8">
-          {title ? (
-            <div className="politics-news-content">
-              <h3>
-                <a href="#">{title}</a>
-              </h3>
-              <p>{date}</p>
-            </div>
-          ) : (
-            <div className="politics-news-content">
-              <h3 className="tag-placeholder"></h3>
-              <div className="tag-placeholder"></div>
-            </div>
-          )}
-        </div>
-      </div>
-    </NewsCardContainer>
+      </NewsCardContainer>
+    </Link>
   );
 };
 
@@ -51,6 +55,7 @@ export default NewsCard;
 const NewsCardContainer = styled.div`
   margin-bottom: 30px;
   transition: 0.5s;
+  height: 100px;
 
   .placeholder {
     background-color: #bdc3c7;
@@ -68,12 +73,16 @@ const NewsCardContainer = styled.div`
   .politics-news-image {
     overflow: hidden;
     position: relative;
+    display: flex;
+    justify-content: center;
 
     img {
-      max-width: 100%;
+      max-width: auto;
       height: auto;
       display: inline-block;
       transition: 0.5s;
+      height: 100px;
+      object-fit: cover;
     }
   }
 

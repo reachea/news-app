@@ -1,7 +1,9 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 interface NewsCardBoxProps {
+  id?: number;
   image?: string;
   tag?: string;
   title?: string;
@@ -9,46 +11,49 @@ interface NewsCardBoxProps {
 }
 
 const NewsCardBox: React.FC<NewsCardBoxProps> = ({
+  id,
   image,
   tag,
   date,
   title,
 }) => {
   return (
-    <NewsCardBoxContiner style={{ height: image ? "" : "130px" }}>
-      <a href="#">
-        {image ? <img src={image} /> : <img className="placeholder" />}
-      </a>
+    <Link href={id ? `/news/${id}` : ""}>
+      <NewsCardBoxContiner style={{ height: image ? "" : "130px" }}>
+        <a href="#">
+          {image ? <img src={image} /> : <img className="placeholder" />}
+        </a>
 
-      {title ? (
-        <div className="news-content">
-          <div className={`tag ${tag ? "" : "tag-placeholder"}`}>{tag}</div>
-          <h3>
-            <a href="#">{title}</a>
-          </h3>
-          <span>{date}</span>
-        </div>
-      ) : (
-        <div className="news-content">
-          <div
-            className={`tag-placeholder`}
-            style={{ marginBottom: "20px", marginTop: "17px" }}
-          ></div>
-          <div
-            className={`${title ? "" : "tag-placeholder"}`}
-            style={{ width: "200px", height: "10px" }}
-          ></div>
-          <div
-            className={`${title ? "" : "tag-placeholder"}`}
-            style={{ width: "200px", height: "10px" }}
-          ></div>
-          <div
-            className={`${title ? "" : "tag-placeholder"}`}
-            style={{ width: "200px", height: "10px" }}
-          ></div>
-        </div>
-      )}
-    </NewsCardBoxContiner>
+        {title ? (
+          <div className="news-content">
+            <div className={`tag ${tag ? "" : "tag-placeholder"}`}>{tag}</div>
+            <h3>
+              <a href="#">{title}</a>
+            </h3>
+            <span>{date}</span>
+          </div>
+        ) : (
+          <div className="news-content">
+            <div
+              className={`tag-placeholder`}
+              style={{ marginBottom: "20px", marginTop: "17px" }}
+            ></div>
+            <div
+              className={`${title ? "" : "tag-placeholder"}`}
+              style={{ width: "200px", height: "10px" }}
+            ></div>
+            <div
+              className={`${title ? "" : "tag-placeholder"}`}
+              style={{ width: "200px", height: "10px" }}
+            ></div>
+            <div
+              className={`${title ? "" : "tag-placeholder"}`}
+              style={{ width: "200px", height: "10px" }}
+            ></div>
+          </div>
+        )}
+      </NewsCardBoxContiner>
+    </Link>
   );
 };
 

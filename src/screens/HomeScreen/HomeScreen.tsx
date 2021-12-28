@@ -59,6 +59,7 @@ const HomeScreen = () => {
       <Row>
         <Col lg={8}>
           <MainCard
+            id={data.latestNews[0]?.id}
             tag={data.latestNews[0]?.category?.name}
             title={data.latestNews[0]?.title}
             date={data.latestNews[0]?.created_at}
@@ -69,6 +70,7 @@ const HomeScreen = () => {
         <Col lg={4}>
           <MainCard
             variant="secondary"
+            id={data.latestNews[1]?.id}
             tag={data.latestNews[1]?.category?.name}
             title={data.latestNews[1]?.title}
             date={data.latestNews[1]?.created_at}
@@ -77,6 +79,7 @@ const HomeScreen = () => {
           />
 
           <NewsCardBox
+            id={data.latestNews[2]?.id}
             tag={data.latestNews[2]?.category?.name}
             title={data.latestNews[2]?.title}
             date={data.latestNews[2]?.created_at}
@@ -84,6 +87,7 @@ const HomeScreen = () => {
           />
 
           <NewsCardBox
+            id={data.latestNews[3]?.id}
             tag={data.latestNews[3]?.category?.name}
             title={data.latestNews[3]?.title}
             date={data.latestNews[3]?.created_at}
@@ -104,6 +108,7 @@ const HomeScreen = () => {
                   {x.news.map((y: any) => {
                     return (
                       <SingleMainItem
+                        id={y.id}
                         title={y.title}
                         category={x.name}
                         thumbnail={y.thumbnail}

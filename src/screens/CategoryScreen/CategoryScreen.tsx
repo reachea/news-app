@@ -2,11 +2,11 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import MainNewsCard from "../../components/MainNewsCard";
-import LatestNews from "./components/LatestNews";
 import SingleMainItem from "../../components/SingleMainItem/SingleMainItem";
 import SocialMedia from "./components/SocialMedia";
 import Link from "next/link";
 import { gql, useQuery } from "@apollo/client";
+import LatestNews from "../HomeScreen/components/LatestNews";
 
 interface CategoryScreenProps {
   id: string;
@@ -77,6 +77,7 @@ const CategoryScreen: React.FC<CategoryScreenProps> = ({ id }) => {
                     return (
                       <Col lg={6}>
                         <MainNewsCard
+                          id={y.id}
                           title={y.title}
                           thumbnail={y.thumbnail}
                           category={

@@ -1,7 +1,9 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 interface SingleMainItemProps {
+  id?: number;
   thumbnail?: string;
   category?: string;
   title?: string;
@@ -10,6 +12,7 @@ interface SingleMainItemProps {
 }
 
 const SingleMainItem: React.FC<SingleMainItemProps> = ({
+  id,
   thumbnail,
   date,
   category,
@@ -17,60 +20,65 @@ const SingleMainItem: React.FC<SingleMainItemProps> = ({
   summary,
 }) => {
   return (
-    <SingleMainItemContainer>
-      <div className="row align-items-center">
-        <div className="col-lg-4">
-          {thumbnail ? (
-            <div className="politics-news-image d-flex flex-row justify-content-center">
-              <a href="#">
-                <img src={thumbnail} alt="image" />
-              </a>
-            </div>
-          ) : (
-            <div className="placeholder"></div>
-          )}
-        </div>
-        <div className="col-lg-8">
-          {title ? (
-            <div className="politics-news-content-box">
-              <span>{category}</span>
-              <h3>
-                <a href="#">{title}</a>
-              </h3>
-              <p>{summary}</p>
-              <div className="date">{date}</div>
-            </div>
-          ) : (
-            <div className="politics-news-content-box">
-              <div className="tag-placeholder"></div>
-              <h3>
-                <a href="#">
+    <Link href={id ? `/news/${id}` : ""}>
+      <SingleMainItemContainer>
+        <div className="row align-items-center">
+          <div className="col-lg-4">
+            {thumbnail ? (
+              <div className="politics-news-image d-flex flex-row justify-content-center">
+                <a>
+                  <img src={thumbnail} alt="image" />
+                </a>
+              </div>
+            ) : (
+              <div className="placeholder"></div>
+            )}
+          </div>
+          <div className="col-lg-8">
+            {title ? (
+              <div className="politics-news-content-box">
+                <span>{category}</span>
+                <h3>
+                  <a>{title}</a>
+                </h3>
+                <p>{summary}</p>
+                <div className="date">{date}</div>
+              </div>
+            ) : (
+              <div className="politics-news-content-box">
+                <div className="tag-placeholder"></div>
+                <h3>
+                  <a>
+                    <div
+                      className="tag-placeholder"
+                      style={{ width: "380px" }}
+                    ></div>
+                  </a>
+                </h3>
+                <p>
                   <div
                     className="tag-placeholder"
-                    style={{ width: "380px" }}
+                    style={{ width: "450px" }}
                   ></div>
-                </a>
-              </h3>
-              <p>
+                  <div
+                    className="tag-placeholder"
+                    style={{ width: "450px" }}
+                  ></div>
+                  <div
+                    className="tag-placeholder"
+                    style={{ width: "450px" }}
+                  ></div>
+                </p>
                 <div
                   className="tag-placeholder"
-                  style={{ width: "450px" }}
+                  style={{ width: "120px" }}
                 ></div>
-                <div
-                  className="tag-placeholder"
-                  style={{ width: "450px" }}
-                ></div>
-                <div
-                  className="tag-placeholder"
-                  style={{ width: "450px" }}
-                ></div>
-              </p>
-              <div className="tag-placeholder" style={{ width: "120px" }}></div>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </SingleMainItemContainer>
+      </SingleMainItemContainer>
+    </Link>
   );
 };
 

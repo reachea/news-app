@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 interface MainCardProps {
+  id?: number;
   tag: string;
   variant?: string;
   title: string;
@@ -13,6 +15,7 @@ interface MainCardProps {
 }
 
 const MainCard: React.FC<MainCardProps> = ({
+  id,
   variant,
   height,
   width,
@@ -23,39 +26,41 @@ const MainCard: React.FC<MainCardProps> = ({
   image,
 }) => {
   return (
-    <MainCardContainer
-      className={`${variant === "secondary" ? "secondary" : "primary"} ${
-        image ? "" : "no-before"
-      }`}
-      style={{
-        maxHeight: height ? height + "px" : "auto",
-        maxWidth: width ? width + "px" : "100%",
-        height: image ? "" : "280px",
-      }}
-    >
-      {image ? (
-        <div className="d-flex flex-row justify-content-center bg-white">
-          <img src={image} />
-        </div>
-      ) : (
-        ""
-      )}
-      {title ? (
-        <div className={`content`}>
-          <div className="tag">{tag}</div>
-          <h3>
-            <a href="#">{title}</a>
-          </h3>
+    <Link href={id ? `/news/${id}` : ""}>
+      <MainCardContainer
+        className={`${variant === "secondary" ? "secondary" : "primary"} ${
+          image ? "" : "no-before"
+        }`}
+        style={{
+          maxHeight: height ? height + "px" : "auto",
+          maxWidth: width ? width + "px" : "100%",
+          height: image ? "" : "280px",
+        }}
+      >
+        {image ? (
+          <div className="d-flex flex-row justify-content-center bg-white">
+            <img src={image} />
+          </div>
+        ) : (
+          ""
+        )}
+        {title ? (
+          <div className={`content`}>
+            <div className="tag">{tag}</div>
+            <h3>
+              <a href="#">{title}</a>
+            </h3>
 
-          <span>
-            <a href="#">{author}</a> / {date}
-          </span>
-          <span>{date}</span>
-        </div>
-      ) : (
-        <></>
-      )}
-    </MainCardContainer>
+            <span>
+              <a href="#">{author}</a> / {date}
+            </span>
+            <span>{date}</span>
+          </div>
+        ) : (
+          <></>
+        )}
+      </MainCardContainer>
+    </Link>
   );
 };
 

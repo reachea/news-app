@@ -1,7 +1,9 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 interface MainNewsCardProps {
+  id?: number;
   category?: string;
   title?: string;
   author?: string;
@@ -10,6 +12,7 @@ interface MainNewsCardProps {
 }
 
 const MainNewsCard: React.FC<MainNewsCardProps> = ({
+  id,
   title,
   author,
   category,
@@ -17,38 +20,40 @@ const MainNewsCard: React.FC<MainNewsCardProps> = ({
   thumbnail,
 }) => {
   return (
-    <MainNewsCardContainer>
-      {thumbnail ? (
-        <div className="politics-news-image">
-          <a href="#">
-            <img src="/main-news-1.jpg" alt="image" />
-          </a>
-        </div>
-      ) : (
-        <div className="placeholder"></div>
-      )}
-      {title ? (
-        <div className="politics-news-content">
-          <span>{category}</span>
-          <h3>
-            <a href="#">{title}</a>
-          </h3>
-          <p>
-            <a href="#">{author}</a> / {date}
-          </p>
-        </div>
-      ) : (
-        <div className="politics-news-content">
-          <div className="tag-placeholder" style={{ width: "100px" }}></div>
-          <h3>
-            <div className="tag-placeholder"></div>
-          </h3>
-          <p>
-            <div className="tag-placeholder"></div>
-          </p>
-        </div>
-      )}
-    </MainNewsCardContainer>
+    <Link href={id ? `/news/${id}` : ""}>
+      <MainNewsCardContainer>
+        {thumbnail ? (
+          <div className="politics-news-image">
+            <a href="#">
+              <img src="/main-news-1.jpg" alt="image" />
+            </a>
+          </div>
+        ) : (
+          <div className="placeholder"></div>
+        )}
+        {title ? (
+          <div className="politics-news-content">
+            <span>{category}</span>
+            <h3>
+              <a href="#">{title}</a>
+            </h3>
+            <p>
+              <a href="#">{author}</a> / {date}
+            </p>
+          </div>
+        ) : (
+          <div className="politics-news-content">
+            <div className="tag-placeholder" style={{ width: "100px" }}></div>
+            <h3>
+              <div className="tag-placeholder"></div>
+            </h3>
+            <p>
+              <div className="tag-placeholder"></div>
+            </p>
+          </div>
+        )}
+      </MainNewsCardContainer>
+    </Link>
   );
 };
 

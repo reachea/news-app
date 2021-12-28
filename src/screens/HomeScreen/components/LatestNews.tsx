@@ -1,19 +1,47 @@
+import { gql, useQuery } from "@apollo/client";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import MainNewsCard from "../../../components/MainNewsCard";
 import NewsCard from "../../../components/NewsCard";
 
+const QUERY = gql`
+  query latestNews {
+    latestNews {
+      id
+      title
+      thumbnail
+      category {
+        id
+        name
+      }
+      created_at
+    }
+  }
+`;
+
 const LatestNews = () => {
+  const { data, loading } = useQuery(QUERY);
+
+  if (!data || loading) return <></>;
+
   return (
     <LatestNewsContainer>
       <div className="section-title">
         <h2>Latest News</h2>
       </div>
 
-      <NewsCard />
-      <NewsCard />
-      <NewsCard />
+      {data.latestNews.map((x: any) => {
+        return (
+          <NewsCard
+            id={x.id}
+            key={x.id}
+            title={x.title}
+            date={x.date}
+            thumbnail={x.thumbnail}
+          />
+        );
+      })}
     </LatestNewsContainer>
   );
 };
