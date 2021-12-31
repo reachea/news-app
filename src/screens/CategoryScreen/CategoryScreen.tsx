@@ -9,12 +9,12 @@ import { gql, useQuery } from "@apollo/client";
 import LatestNews from "../HomeScreen/components/LatestNews";
 
 interface CategoryScreenProps {
-  id: string;
+  id: number;
 }
 
 const QUERY = gql`
-  query publicNewsQuery {
-    publicNewsCategoryList {
+  query publicNewsCategoryDetail($id: Int!) {
+    publicNewsCategoryDetail(id: $id) {
       id
       name
       news {
@@ -29,37 +29,27 @@ const QUERY = gql`
 `;
 
 const CategoryScreen: React.FC<CategoryScreenProps> = ({ id }) => {
-  const { data, loading } = useQuery(QUERY);
+  const { data, loading } = useQuery(QUERY, {
+    variables: {
+      id,
+    },
+  });
 
   if (!data || loading) return <></>;
-
-  console.log(data.publicNewsCategoryList);
 
   return (
     <NewsScreenContainer>
       <div className="page-title-area">
         <div className="container">
           <div className="page-title-content">
-            <h2>
-              {
-                data.publicNewsCategoryList.find(
-                  (x: any) => x.id === Number(id)
-                ).name
-              }
-            </h2>
+            <h2>{data.publicNewsCategoryDetail.name}</h2>
             <ul>
               <li>
                 <Link href="/">
                   <a>Home</a>
                 </Link>
               </li>
-              <li>
-                {
-                  data.publicNewsCategoryList.find(
-                    (x: any) => x.id === Number(id)
-                  ).name
-                }
-              </li>
+              <li>{data.publicNewsCategoryDetail.name}</li>
             </ul>
           </div>
         </div>
@@ -69,38 +59,32 @@ const CategoryScreen: React.FC<CategoryScreenProps> = ({ id }) => {
         <Row>
           <Col lg={8}>
             <Row className="mb-5">
-              {data.publicNewsCategoryList
-                .filter((x: any) => x.id === Number(id))[0]
-                .news.map((y: any, idx: number) => {
-                  if (idx < 2) {
-                    console.log(y);
-                    return (
-                      <Col lg={6}>
-                        <MainNewsCard
-                          id={y.id}
-                          title={y.title}
-                          thumbnail={y.thumbnail}
-                          category={
-                            data.publicNewsCategoryList.find(
-                              (x: any) => x.id === Number(id)
-                            ).name
-                          }
-                          date={y.created_at}
-                          author={"None"}
-                        />
-                      </Col>
-                    );
-                  } else {
-                    return (
-                      <SingleMainItem
+              {data.publicNewsCategoryDetail.news.map((y: any, idx: number) => {
+                if (idx < 2) {
+                  console.log(y);
+                  return (
+                    <Col lg={6}>
+                      <MainNewsCard
+                        id={y.id}
                         title={y.title}
                         thumbnail={y.thumbnail}
-                        category={y.name}
+                        category={data.publicNewsCategoryDetail.name}
                         date={y.created_at}
+                        author={"None"}
                       />
-                    );
-                  }
-                })}
+                    </Col>
+                  );
+                } else {
+                  return (
+                    <SingleMainItem
+                      title={y.title}
+                      thumbnail={y.thumbnail}
+                      category={y.name}
+                      date={y.created_at}
+                    />
+                  );
+                }
+              })}
             </Row>
           </Col>
           <Col lg={4}>
@@ -116,12 +100,6 @@ const CategoryScreen: React.FC<CategoryScreenProps> = ({ id }) => {
 export default CategoryScreen;
 
 const NewsScreenContainer = styled.div`
-  .container {
-    @media screen and (min-width: 1200px) {
-      max-width: 1400px !important;
-    }
-  }
-
   .page-title-area {
     padding-top: 35px;
     padding-bottom: 32px;

@@ -7,22 +7,31 @@ import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import LatestNews from "../HomeScreen/components/LatestNews";
 import SocialMedia from "../HomeScreen/components/SocialMedia";
+import PageBody from "../../components/PageBody";
+import { SEO } from "../../components/SEO";
 
-const NewDetail = () => {
+const NewDetail = ({ news }: any) => {
   return (
     <NewDetailContainer>
+      <SEO
+        title={news.title}
+        description={news.summary}
+        image={news.thumbnail}
+      />
       <div className="page-title-area">
         <div className="container">
-          <div className="page-title-content">
-            <h2>New Detail</h2>
-            <ul>
-              <li>
-                <Link href="/">
-                  <a>Home</a>
-                </Link>
-              </li>
-              <li>New Detail</li>
-            </ul>
+          <div className="page-title-content row">
+            <h2 className="col-md-9">{news.title}</h2>
+            <div className="col-md-3">
+              <ul>
+                <li>
+                  <Link href="/">
+                    <a>Home</a>
+                  </Link>
+                </li>
+                <li>New Detail</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -30,47 +39,11 @@ const NewDetail = () => {
       <div className="container first-section">
         <Row>
           <Col lg={8} className="main-content">
-            <img src="/main-news-1.jpg" alt="image" />
+            <img src={news.thumbnail} alt="image" />
 
             <div className="content">
-              <span>
-                <a href="#">Jonson Steven</a> / 28 September 2021
-              </span>
-
-              <h3>
-                <a href="#">
-                  The Prime Minister’s said that selfish nations are constantly
-                  dying for their own interests.
-                </a>
-              </h3>
+              <PageBody data={news.description} />
             </div>
-
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              unde omnis iste natus error sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-              veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-              aut fugit, sed quia consequuntur magni dolores eos qui ratione.
-            </p>
-
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              unde omnis iste natus error sit voluptatem accusantium doloremque
-              laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-              veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-              aut fugit, sed quia consequuntur magni dolores eos qui ratione.
-            </p>
           </Col>
           <Col lg={4}>
             <form className="search">
@@ -96,12 +69,6 @@ const NewDetail = () => {
 export default NewDetail;
 
 const NewDetailContainer = styled.div`
-  .container {
-    @media screen and (min-width: 1200px) {
-      max-width: 1400px !important;
-    }
-  }
-
   .main-container {
     margin-top: 20px;
 
@@ -132,14 +99,13 @@ const NewDetailContainer = styled.div`
     }
 
     ul {
-      text-align: right;
-      position: absolute;
-      right: 0;
-      padding-left: 0;
-      margin-bottom: 0;
-      list-style-type: none;
-      top: 50%;
-      transform: translateY(-50%);
+      float: right;
+      margin-bottom: 0px;
+
+      @media screen and (max-width: 792px) {
+        float: left;
+        margin-top: 15px;
+      }
 
       li {
         display: inline-block;

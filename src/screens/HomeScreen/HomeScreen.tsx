@@ -165,10 +165,4 @@ const HomeScreenContainer = styled.div`
       gap: 20px;
     }
   }
-
-  &.container {
-    @media screen and (min-width: 1200px) {
-      max-width: 1400px !important;
-    }
-  }
 `;

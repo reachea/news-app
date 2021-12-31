@@ -25,7 +25,7 @@ const MainNewsCard: React.FC<MainNewsCardProps> = ({
         {thumbnail ? (
           <div className="politics-news-image">
             <a href="#">
-              <img src="/main-news-1.jpg" alt="image" />
+              <img src={thumbnail} alt="image" />
             </a>
           </div>
         ) : (

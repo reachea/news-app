@@ -38,7 +38,10 @@ const MainCard: React.FC<MainCardProps> = ({
         }}
       >
         {image ? (
-          <div className="d-flex flex-row justify-content-center bg-white">
+          <div
+            className="d-flex flex-row justify-content-center bg-white align-items-center"
+            style={{ minHeight: "228px" }}
+          >
             <img src={image} />
           </div>
         ) : (
@@ -54,7 +57,6 @@ const MainCard: React.FC<MainCardProps> = ({
             <span>
               <a href="#">{author}</a> / {date}
             </span>
-            <span>{date}</span>
           </div>
         ) : (
           <></>

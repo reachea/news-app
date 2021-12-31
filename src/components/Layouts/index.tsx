@@ -3,6 +3,7 @@ import MainNavbar from "../MainNavbar";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import SubNavbar from "../SubNavbar";
+import MainFooter from "../MainFooter";
 
 const Layout = (props: any) => {
   return (
@@ -11,6 +12,7 @@ const Layout = (props: any) => {
       <MainNavbar />
 
       <MainContent>{props.children}</MainContent>
+      <MainFooter />
     </>
   );
 };

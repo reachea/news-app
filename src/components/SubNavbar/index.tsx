@@ -52,12 +52,6 @@ const SubNavbarContainer = styled.div`
   background-color: #111111;
   padding: 10px 0px;
 
-  .container {
-    @media screen and (min-width: 1200px) {
-      max-width: 1400px !important;
-    }
-  }
-
   .subnavbar {
     justify-content: space-between;
   }

@@ -14,8 +14,7 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      slug: params.slug,
-      id: context.query.id,
+      id: Number(params.id),
     },
   };
 }

@@ -105,6 +105,14 @@ const NewsCardBoxContiner = styled.div`
         position: relative;
         text-decoration: none;
         transition: all 0.5s ease;
+        font-size: 16px;
+
+        -webkit-line-clamp: 3;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        white-space: pre-wrap;
+        display: -webkit-box;
 
         &::before {
           content: "";

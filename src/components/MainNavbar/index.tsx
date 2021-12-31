@@ -31,11 +31,7 @@ const MainNavbar = () => {
               <Nav className="mr-auto computer">
                 {data.publicNewsCategoryList.map((x: any) => {
                   return (
-                    <Link
-                      href={`/${x.name.split(" ").join("-").toLowerCase()}?id=${
-                        x.id
-                      }`}
-                    >
+                    <Link href={`/category/${x.id}`}>
                       <a className="nav-link">{x.name}</a>
                     </Link>
                   );
@@ -65,11 +61,7 @@ export const NavbarBrand = styled(Navbar.Brand)`
   margin-right: 60px;
 `;
 
-const MainNav = styled(Container)`
-  @media screen and (min-width: 1200px) {
-    max-width: 1400px !important;
-  }
-`;
+const MainNav = styled(Container)``;
 
 const MainNavbarContainer = styled(Navbar)`
   background-color: #f6f6f6 !important;

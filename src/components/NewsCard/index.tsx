@@ -88,9 +88,16 @@ const NewsCardContainer = styled.div`
 
   .politics-news-content {
     h3 {
-      font-size: 18px;
+      font-size: 16px;
       margin-top: 12px;
       margin-bottom: 12px;
+      line-height: 30px !important;
+      -webkit-line-clamp: 3;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      white-space: pre-wrap;
+      display: -webkit-box;
 
       a {
         color: #09101f;
