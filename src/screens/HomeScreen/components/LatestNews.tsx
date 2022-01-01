@@ -49,6 +49,8 @@ const LatestNews = () => {
 export default LatestNews;
 
 const LatestNewsContainer = styled.div`
+  margin-bottom: 50px;
+
   .section-title {
     margin-bottom: 25px;
     position: relative;

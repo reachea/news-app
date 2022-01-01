@@ -14,7 +14,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ thumbnail, title, date, id }) => {
     <Link href={id ? `/news/${id}` : ""}>
       <NewsCardContainer>
         <div className="row align-items-center">
-          <div className="col-lg-4 col-sm-4">
+          <div className="col-4">
             {thumbnail ? (
               <div className="politics-news-image">
                 <a>
@@ -29,7 +29,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ thumbnail, title, date, id }) => {
               </div>
             )}
           </div>
-          <div className="col-lg-8 col-sm-8">
+          <div className="col-8">
             {title ? (
               <div className="politics-news-content">
                 <h3>
@@ -56,6 +56,10 @@ const NewsCardContainer = styled.div`
   margin-bottom: 30px;
   transition: 0.5s;
   height: 100px;
+
+  .row {
+    gap: 0px !important;
+  }
 
   .placeholder {
     background-color: #bdc3c7;

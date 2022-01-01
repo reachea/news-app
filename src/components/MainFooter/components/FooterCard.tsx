@@ -19,14 +19,14 @@ const FooterCard: React.FC<FooterCardProps> = ({
     <FooterCardContainer key={id}>
       <Link href={`/news/${id}`}>
         <div className="row align-items-center">
-          <div className="col-md-4">
+          <div className="col-4">
             <div className="post-image d-flex flex-row justify-content-center">
               <a href="#">
                 <img src={thumbnail} />
               </a>
             </div>
           </div>
-          <div className="col-md-8 content">
+          <div className="col-8 content">
             <h4>
               <a>{title ? title : "N/A"}</a>
             </h4>
@@ -41,7 +41,7 @@ const FooterCard: React.FC<FooterCardProps> = ({
 export default FooterCard;
 
 const FooterCardContainer = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 
   &:hover {
     cursor: pointer;
